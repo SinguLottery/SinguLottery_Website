@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <script type="text/javascript" src="web3.min.js"></script>
+  <title>SLY - ERC20 Lottery</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+  <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/one-page-wonder.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+  <header class="masthead text-center text-white">
+    <div class="masthead-content">
+      <div class="container">
+        <h1 class="masthead-heading mb-0">SinguLottery</h1>
+        <h2 class="masthead-subheading mb-0">SLY - The first and only burnable ERC20-based Lottery!</h2>
+        <br/>
+        <div class = "row justify-content-md-center">
+            <div class="col-sm col-lg-2">
+              <a class="nav-link" href="https://twitter.com/SinguLottery"><i class="fab fa-twitter" style="font-size:70px; color:#FFFFFF"></i></a>
+            </div>
+            <div class="col-sm col-lg-auto">
+              <a class="nav-link" href="https://t.me/SinguLottery"><i class="fab fa-telegram" style="font-size:70px; color:#FFFFFF"></i></a>
+            </div>
+            <div class="col-sm col-lg-2">
+              <a class="nav-link" href="https://discord.gg/xYjBm39"><i class="fab fa-discord " style="font-size:70px; color:#FFFFFF"></i></a>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="bg-circle-1 bg-circle"></div>
+    <div class="bg-circle-2 bg-circle"></div>
+    <div class="bg-circle-3 bg-circle"></div>
+    <div class="bg-circle-4 bg-circle"></div>
+  </header>
+
+  <div id="data"></div>
+  <br/>
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" src="img/first_image.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <div class="p-5">
+            <h2 class="display-4">What is SLY?</h2>
+            <p>SinguLottery is the first Ethereum lottery that rewards <b>all participants</b>
+              with SLY, a burnable ERC20 token. Every Sunday, one lucky participant will be chosen
+              to receive the collected pot (in ETH) from the past week. Check out
+              <a href="#getting-started">getting started</a> for more information on how you can
+              take place in this week's drawing!
+              <br/><br/>
+              All transfers of SLY outside of the distribution will be burned at 1%. This makes
+              SLY the first ERC20 lottery token which is also deflationary! Just like other deflationary
+              tokens (BOMB), every time you send SLY tokens 1% of the transaction will be destroyed.
+              <br/><br/>
+              <i>SLY's token distribution will occur according to the following table:</i>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8 mx-auto">
+          <h3 class="text-center">Distribution Table</h3><br/>
+          <table style="width:100%" align="center">
+            <tr class="text-center">
+              <th><h5>ETH Sent</h5></th>
+              <th><h5>SLY Received</h5></th>
+              <th><h5>ETH Per SLY</h5></th>
+              <th><h5>USD Per SLY</h5></th>
+            </tr>
+
+            <tr class="text-center">
+              <td>0.05 ETH</td>
+              <td>1 SLY</td>
+              <td>0.050 ETH/SLY</td>
+              <td id="first"></td>
+            </tr>
+
+            <tr class="text-center">
+              <td>0.1  ETH</td>
+              <td>3 SLY</td>
+              <td>0.030 ETH/SLY</td>
+              <td id="second"></td>
+
+            <tr class="text-center">
+              <td>0.5  ETH</td>
+              <td>20 SLY</td>
+              <td>0.025 ETH/SLY</td>
+              <td id="third"></td>
+            </tr>
+
+            <tr class="text-center">
+              <td>1 ETH</td>
+              <td>35 SLY</td>
+              <td>0.020 ETH/SLY</td>
+              <td id="fourth"></td>
+            </tr>
+
+            <tr class="text-center">
+              <td>10 ETH</td>
+              <td>666 SLY</td>
+              <td>0.015 ETH/SLY</td>
+              <td id="fifth"></td>
+            </tr>
+
+            <tr class="text-center">
+              <td>100 ETH</td>
+              <td>10,000 SLY</td>
+              <td>0.010 ETH/SLY</td>
+              <td id="sixth"></td>
+            </tr>
+          </table>
+
+          <br/>
+          <p style="text-align: center">
+            <b>Odds of Winning = SLY Recieved This Week / Total SLY Distributed This Week</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br/>
+
+  <section>
+    <div class="block block-pd-lg block-bg-overlay text-center">
+      <a href="https://ropsten.etherscan.io/token/0x0ee1ebbf7847923f1422d6218748211b615988ed" style="text-decoration: none"><button class="btn mx-auto">View on Etherscan</button></a>
+    </div>
+    <br/><br/>
+  </section>
+
+  <section>
+    <div class="block bg-secondary block-pd-lg block-bg-overlay text-center" data-bg-img="img/parallax-bg.jpg" >
+
+      <h2 style="text-align:center">Token Info</h2>
+      <div class="row stats-row">
+         <div class="stats-col text-center col-md-3 col-sm-6">
+           <div class="circle">
+             <span class="" id="totalSupply">50,000,000</span> SLY
+           </div>
+           <br/>
+           <br/>
+           <h3>Total Supply</h3>
+         </div>
+
+         <div class="stats-col text-center col-md-3 col-sm-6">
+           <div class="circle">
+             <span class="" id="circulatingSupply"></span> SLY
+           </div>
+           <br/>
+           <br/>
+           <h3>Circulating Supply</h3>
+         </div>
+
+         <div class="stats-col text-center col-md-3 col-sm-6">
+           <div class="circle">
+             <span class="" id="givenOut"></span> SLY
+           </div>
+           <br/>
+           <br/>
+           <h3>SLY Distributed This Week</h3>
+         </div>
+
+         <div class="stats-col text-center col-md-3 col-sm-6">
+           <div class="circle">
+             <span class="" id="nextGiveaway"></span> ETH
+           </div>
+           <br/>
+           <br/>
+           <h3>Next Jackpot</h3>
+         </div>
+
+       </div>
+
+      <br/><br/><br/><br/>
+     </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-lg-offset-6" style="float: none; margin: 0 auto;">
+          <h2 style="text-align:center">Token Stats</h2>
+          <p>SLY will have 5 million coins premined and distributed to key partners and to reward members of the development team. These 5 million coins
+          will also be used for community bounties and airdrops to promote the project. Additionally, 10% of the weekly jackpots will be donated to the development
+          team for the purpose of paying exchange listing fees. Here are some quick stats on SLY:
+          <ul>
+            <li>
+              <b>Name:</b> SinguLottery
+            </li>
+            <li>
+              <b>Ticker:</b> SLY
+            </li>
+            <li>
+              <b>Starting Total Supply:</b> 50,000,000 SLY
+            </li>
+            <li>
+              <b>Decimals:</b> 18
+            </li>
+            <li>
+              <b>Burn Rate:</b> 1%
+            </li>
+          </ul>
+        </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br/>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="mx-auto">
+          <h2 style="text-align:center">Distribution Calculator</h2>
+          <br/>
+          <p class="mx-auto" style="text-align: center;"><input type='text' id="eth_sent" class="calculator-screen" placeholder="ETH Sent"/></p>
+
+          <p class="calculator-screen-results mx-auto">Giveout: <a id="calculate_result">0</a> SLY</p>
+
+          <p class="calculator-screen-odds mx-auto">Odds: <a id="odds">0%</a></p>
+
+          <button onclick="calculate_giveaway()" id="calc_button" class="btn mx-auto"> Calculate </button>
+        </div>
+      </div>
+    </div>
+  </section>
+    <br/>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center ">
+        <div class="accordion mx-auto" id="accordionExample">
+          <h2 style="text-align: center; font-size: 5rem"><a name="getting-started">Getting Started</a><h2>
+            <p style="text-align: center; font-size: 1.25rem; font-weight: 200"><i>We highly recommend using either Metamask or MyEtherWallet.</i></p>
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn-tutorial collapsed mx-auto" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Using Metamask</button>
+              </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <div class="container">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                      <div class="p-5">
+                        <img class="img-fluid" src="img/tutorial_1.png" alt="" style="width:356px;height:600px">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                      <div class="p-5">
+                        <h2 class="display-4" style="text-align: center"><b>Step 1</b></h2>
+                        <p> The first step for participating in the SinguLottery is to send some Ethereum to the contract address [ADDRESS HERE].
+                          Your contribution to the drawing will be rewarded in SLY, check the table above (or use the distribution calculator) to
+                          determine how much SLY you'll receive for the amount of ETH you send. Your odds of winning are directly proportional to the
+                          amount of ETH sent, so the more you send the more likely you are to win the grand prize!
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="row align-items-center">
+                      <div class="col-lg-6 order-lg-2">
+                        <div class="p-5">
+                          <h2 class="display-4" style="text-align: center"><b>Step 2</b></h2>
+                          <p> Next, we will need to edit the gas price of the transaction in order to ensure the transaction goes through. Gas prices
+                            are high for SinguLottery because the Smart Contract function that receives your Ethereum and distributes your SLY is doing
+                            multiple, on-chain transactions to remain completely trustless. These transactions include:
+                            <ul style="font-size: 1.5rem; font-weight: 150;">
+                              <li>Determining how much SLY you will receive.</li>
+                              <li>Randomizing the seed for SLY's on-chain Random Number Generator.</li>
+                              <li>Entering your address into the current entry list for the next drawing.</li>
+                            </ul>
+                          </p>
+                        </div>
+                      </div>
+                        <div class="col-lg-6 order-lg-1">
+                          <div class="p-5">
+                            <img class="img-fluid" src="img/tutorial_2.png" alt="" style="width:356px;height:600px">
+                          </div>
+                        </div>
+                    </div>
+                      <div class="row align-items-center">
+                        <div class="col-lg-6 order-lg-2">
+                          <div class="p-5">
+                            <img class="img-fluid" src="img/tutorial_3.png" alt="" style="width:356px;height:600px">
+                          </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-1">
+                          <div class="p-5">
+                            <h2 class="display-4" style="text-align: center"><b>Step 3</b></h2>
+                            <p> Now we need to change the gas limit to ensure the transaction has enough gas. We recommend using a gas limit
+                              value of 200,000 to ensure your transaction goes through. If your transaction is still failing despite the high
+                              gas limit, you may want to consider raising the gas limit value to 300,000. Transactions may also fail if the Ethereum
+                              network is experiencing abnormally high amounts of activity. If your transactions are taking a long time, you may want
+                              to consider raising your gas price to speed up the transaction.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                        <div class="row align-items-center">
+                          <div class="col-lg-6 order-lg-2">
+                            <div class="p-5">
+                              <h2 class="display-4" style="text-align: center"><b>Step 4</b></h2>
+                              <p> Now we're ready to send the transaction through! Click "Next" to finish sending the transaction, and then click "Confirm"
+                                to post it on the Ethereum network. Within 5-10 minutes you will receive your SLY, and your address will be entered in this weeks
+                                drawing. Good luck!
+                              </p>
+                            </div>
+                          </div>
+                            <div class="col-lg-6 order-lg-1">
+                              <div class="p-5">
+                                <img class="img-fluid" src="img/tutorial_5.png" alt="" style="width:356px;height:600px">
+                              </div>
+                            </div>
+                        </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn-tutorial collapsed mx-auto" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Using MyEtherWallet (MEW)</button>
+              </h2>
+            </div>
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
+                <div class="container">
+                  <div class="row align-items-center">
+                    <div class="col-lg-12 order-lg-1">
+                      <div class="p-5">
+                        <h2 class="display-4" style="text-align: center"><b>Step 1</b></h2>
+                        <p> The first step for participating in the SinguLottery is to send some Ethereum to the contract address [ADDRESS HERE].
+                          Your contribution to the drawing will be rewarded in SLY, check the table above (or use the distribution calculator) to
+                          determine how much SLY you'll receive for the amount of ETH you send. Your odds of winning are directly proportional to the
+                          amount of ETH sent, so the more you send the more likely you are to win the grand prize! We will need to edit the gas price
+                          of the transaction in order to ensure the transaction goes through. Gas prices are high for SinguLottery because the Smart
+                          Contract function that receives your Ethereum and distributes your SLY is doing multiple, on-chain transactions to remain
+                          completely trustless. These transactions include:
+                            <ul style="font-size: 1.5rem; font-weight: 150;">
+                              <li>Determining how much SLY you will receive.</li>
+                              <li>Randomizing the seed for SLY's on-chain Random Number Generator.</li>
+                              <li>Entering your address into the current entry list for the next drawing.</li>
+                            </ul>
+                            <b style="font-size: 1.5rem; font-weight: 500;" >Click the "Data & Gas Limit" button to begin editing gas prices.</b>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-center">
+                    <div class="col-lg-12 order-lg-2">
+                      <div class="p-5">
+                        <img class="img-fluid" src="img/mew_tutorial_1.png" alt="" style="width:900px;height:440px">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-center">
+                    <div class="order-lg-1">
+                      <div class="p-5">
+                        <h2 class="display-4" style="text-align: center"><b>Step 2</b></h2>
+                        <p> Now we need to change the gas limit to ensure the transaction has enough gas. We recommend using a gas limit
+                          value of 200,000 to ensure your transaction goes through. If your transaction is still failing despite the high
+                          gas limit, you may want to consider raising the gas limit value to 300,000. Transactions may also fail if the Ethereum
+                          network is experiencing abnormally high amounts of activity. If your transactions are taking a long time, you may want
+                          to consider raising your gas price to speed up the transaction. Now we're ready to send the transaction through!<br/>
+
+                          <b style="font-size: 1.5rem; font-weight: 500;" >Click "Send Transaction" to post it on the Ethereum network. Within
+                            5-10 minutes you will receive your SLY, and your address will be entered in this weeks drawing. Good luck!</b>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-center">
+                    <div class="col-lg-8 order-lg-2 mx-auto">
+                      <div class="p-5">
+                        <img class="img-fluid" src="img/mew_tutorial_2.png" alt="" style="width:600px;height:540px">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-black">
+    <div class="container">
+      <p class="m-0 text-center text-white small"><a href="mailto:erc20lotto@protonmail.com">erc20lotto@protonmail.com</a>            Copyright &copy; SinguLottery 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+<script>
+
+  // window.addEventListener('load', async () => {
+  //   // Modern dapp browsers...
+  //
+  // });
+
+  $(document).ready(function(){
+    const rpcURL = 'https://ropsten.infura.io/v3/96a18db9935240bf97b86ab2c08f0bee'
+
+    // if (typeof web3 !== 'undefined') {
+    //     web3 = new Web3(web3.currentProvider);
+    // } else {
+    //     console.log('No web3? You should consider trying MetaMask!');
+    //     web3 = new Web3(new Web3.providers.HttpProvider(rpcURL));
+    // }
+
+    //const web3 = new Web3(Web3.currentProvider);
+    if (window.ethereum) {
+      window.web3 = new Web3(ethereum);
+      try {
+        // Request account access if needed
+        // await ethereum.enable();
+        // Acccounts now exposed
+      } catch (error) {
+        // User denied account access...
+      }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      web3 = new Web3(web3.currentProvider);
+      // Acccounts always exposed
+    }
+    // Non-dapp browsers...
+    else {
+        console.log('No web3? You should consider trying MetaMask!');
+        web3 = new Web3(new Web3.providers.HttpProvider(rpcURL));
+    }
+
+    const abi = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_owner","type":"address"},{"indexed":true,"internalType":"address","name":"_spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"_value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_from","type":"address"},{"indexed":true,"internalType":"address","name":"_to","type":"address"},{"indexed":false,"internalType":"uint256","name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"constant":false,"inputs":[{"internalType":"string","name":"seed","type":"string"}],"name":"addToSeed","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"_owner","type":"address"},{"internalType":"address","name":"_spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_spender","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"burnRateDenom","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"circulatingSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"duration","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"endTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"entries","outputs":[{"internalType":"address payable","name":"ticket","type":"address"},{"internalType":"uint256","name":"currentTotal","type":"uint256"},{"internalType":"uint256","name":"tokensSent","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"fiveHundMult","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"giveaway_total","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"halfMult","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"hundMult","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"mostRecentWinner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"oneMult","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"startTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"tenMult","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"tenthMult","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"triggerGiveaway","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"triggerPayableSafe","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"triggerPayableUnsafe","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
+
+    const address = '0x1f2f87e921c0da54f57e783f86959e190e29f467'
+
+    const contract = new web3.eth.Contract(abi, address)
+
+    var hundMult = 10**20
+    var tenMult = 10**19
+    var oneMult = 10**18
+    var halfMult = (10**17) * 5
+    var tenthMult = 10**17
+    var fiveHundMult = (10**16) * 5
+
+    var currentGiveaway = 0;
+
+    web3.eth.getBalance(address, (err, wei) => {
+      document.getElementById('nextGiveaway').innerHTML = web3.utils.fromWei(wei, 'ether')
+    })
+
+    contract.methods.circulatingSupply().call((err, result) => {
+      document.getElementById('circulatingSupply').innerHTML = numberWithCommas(result / oneMult)
+    })
+
+    contract.methods.totalSupply().call((err, result) => {
+      document.getElementById('totalSupply').innerHTML = numberWithCommas(result / oneMult)
+    })
+
+    contract.methods.giveaway_total().call((err, result) => {
+        document.getElementById('givenOut').innerHTML = numberWithCommas(result);
+    })
+
+    contract.methods.giveaway_total().call((err, result) => {
+      currentGiveaway = result
+    })
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+
+
+    var json = new XMLHttpRequest(); // start a new variable to store the JSON in
+    json.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) { // if HTTP header 200 - ok
+        var object = JSON.parse(this.responseText); // set the variable 'object' to whatever we get back, in our case it is an array of 10 different arrays
+        console.log(object[0]["current_price"]);
+
+        var current_price = object[0]["current_price"];
+        var first_price = current_price * 0.05;
+        var second_price = (current_price * 0.1) / 3;
+        var third_price = (current_price * 0.5) / 20;
+        var fourth_price = current_price / 35;
+        var fifth_price = (current_price * 10) / 666;
+        var sixth_price = (current_price * 100) / 10000;
+
+        console.log(first_price.toFixed(2));
+        console.log(second_price.toFixed(2));
+        console.log(third_price.toFixed(2));
+        console.log(fourth_price.toFixed(2));
+        console.log(fifth_price.toFixed(2));
+        console.log(sixth_price.toFixed(2));
+
+        document.getElementById('first').innerHTML = "$" + first_price.toFixed(2) + "/SLY";
+        document.getElementById('second').innerHTML = "$" + second_price.toFixed(2)+ "/SLY";
+        document.getElementById('third').innerHTML = "$" + third_price.toFixed(2)+ "/SLY";
+        document.getElementById('fourth').innerHTML = "$" + fourth_price.toFixed(2)+ "/SLY";
+        document.getElementById('fifth').innerHTML = "$" + fifth_price.toFixed(2)+ "/SLY";
+        document.getElementById('sixth').innerHTML = "$" + sixth_price.toFixed(2)+ "/SLY";
+
+
+        for(var i=0;i<object.length;i++){   // looping through json
+
+          var item = object[i];
+               if(item["symbol"] === "ETH"){   // finding when symbol is ETH
+                      var usdValue = "$" + item["price_usd"];    // Fetching price_usd value
+                      document.getElementById("data").innerHTML = usdValue;
+
+               }
+           }
+      }
+    };
+
+
+    json.open(
+      "GET", // method
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum", // url
+      true // async
+    ); // initialise the request
+    json.send(); //send request
+
+
+
+    document.getElementById('calc_button').onclick = function(){
+
+      contract.methods.giveaway_total().call((err, result) => {
+        currentGiveaway = result
+      })
+
+      var eth_val = parseFloat(document.getElementById('eth_sent').value) * oneMult;
+
+      var multiplier = Math.floor(eth_val / hundMult);
+      var giveout = multiplier * 10000;
+      eth_val -= multiplier * hundMult;
+
+      multiplier = Math.floor(eth_val / tenMult);
+      giveout += multiplier * 666;
+      eth_val -= multiplier * tenMult;
+
+      multiplier = Math.floor(eth_val / oneMult);
+      giveout += multiplier * 35;
+      eth_val -= multiplier * oneMult;
+
+      multiplier = Math.floor(eth_val / halfMult);
+      giveout += multiplier * 20;
+      eth_val -= multiplier * halfMult;
+
+      multiplier = Math.floor(eth_val / tenthMult);
+      giveout += multiplier * 3;
+      eth_val -= multiplier * tenthMult;
+
+      multiplier = Math.floor(eth_val / fiveHundMult);
+      giveout += multiplier;
+      eth_val -= multiplier * fiveHundMult;
+
+      document.getElementById('calculate_result').innerHTML = giveout || 0
+      var denom = parseInt(currentGiveaway) + parseInt(giveout)
+      console.log((100 * (giveout / denom)).toFixed(2) + "%");
+      document.getElementById('odds').innerHTML = (100 * (giveout / denom) || 0).toFixed(2) + "%"
+
+    };
+  });
+</script>
