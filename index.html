@@ -352,7 +352,7 @@
           <div class="card">
             <div class="card-header" id="headingTwo">
               <h2 class="mb-0">
-                <button class="btn-tutorial collapsed mx-auto" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Using MyEtherWallet (MEW)</button>
+                <button class="btn-tutorial collapsed mx-auto" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Using My Ether Wallet (MEW)</button>
               </h2>
             </div>
 
@@ -493,19 +493,19 @@
     var currentGiveaway = 0;
 
     web3.eth.getBalance(address, (err, wei) => {
-      document.getElementById('nextGiveaway').innerHTML = web3.utils.fromWei(wei, 'ether')
+      document.getElementById('nextGiveaway').innerHTML = web3.utils.fromWei(wei, 'ether') || 0
     })
 
     contract.methods.circulatingSupply().call((err, result) => {
-      document.getElementById('circulatingSupply').innerHTML = numberWithCommas(result / oneMult)
+      document.getElementById('circulatingSupply').innerHTML = numberWithCommas((result / oneMult) || 0)
     })
 
     contract.methods.totalSupply().call((err, result) => {
-      document.getElementById('totalSupply').innerHTML = numberWithCommas(result / oneMult)
+      document.getElementById('totalSupply').innerHTML = numberWithCommas((result / oneMult) || 0)
     })
 
     contract.methods.giveaway_total().call((err, result) => {
-        document.getElementById('givenOut').innerHTML = numberWithCommas(result);
+        document.getElementById('givenOut').innerHTML = numberWithCommas(result || 0);
     })
 
     contract.methods.giveaway_total().call((err, result) => {
