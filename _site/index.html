@@ -7,8 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <script type="text/javascript" src="web3.min.js"></script>
+
+  <script id="chatBroEmbedCode">
+  /* Chatbro Widget Embed Code Start */
+  function ChatbroLoader(chats,async){async=!1!==async;var params={embedChatsParameters:chats instanceof Array?chats:[chats],lang:navigator.language||navigator.userLanguage,needLoadCode:'undefined'==typeof Chatbro,embedParamsVersion:localStorage.embedParamsVersion,chatbroScriptVersion:localStorage.chatbroScriptVersion},xhr=new XMLHttpRequest;xhr.withCredentials=!0,xhr.onload=function(){eval(xhr.responseText)},xhr.onerror=function(){console.error('Chatbro loading error')},xhr.open('GET','//www.chatbro.com/embed.js?'+btoa(unescape(encodeURIComponent(JSON.stringify(params)))),async),xhr.send()}
+  /* Chatbro Widget Embed Code End */
+  ChatbroLoader({encodedChatId: '64SL9'});
+  </script>
+
   <title>SLY - ERC20 Lottery</title>
 
   <!-- Bootstrap core CSS -->
@@ -151,7 +158,7 @@
 
   <section>
     <div class="block block-pd-lg block-bg-overlay text-center">
-      <a style="color: #000; font-size:2rem">Next Giveaway: <p id="countdown" style="color: #000"></p></a>
+      <a style="color: #000; font-size:2rem">Next Drawing: <p id="countdown" style="color: #000"></p></a>
       <a href="https://ropsten.etherscan.io/token/0xe12cf0effbdda83c1b768395bb9060f2fa132de5" style="text-decoration: none"><button class="btn mx-auto">View on Etherscan</button></a>
     </div>
     <br/><br/>
