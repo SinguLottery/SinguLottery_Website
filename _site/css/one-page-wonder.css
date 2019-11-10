@@ -89,6 +89,7 @@ h6 {
   border-radius: 50%;
   padding: 55px 25px 0 25px;
   font-weight: 700;
+
 }
 
 .stats-col .circle .stats-dollar::before {
@@ -112,9 +113,11 @@ h6 {
   padding: 55px 25px 0 25px;
   position: relative;
 
+      text-shadow: 2px 2px 4px #42342aff;
 }
 
 .stats-col .circle .stats-no {
+    text-shadow: 2px 2px 4px #42342aff;
   display: inline-block;
   color: #fff;
   width: 160px;
@@ -287,7 +290,7 @@ header.masthead {
   overflow: hidden;
   padding-top: calc(7rem + 72px);
   padding-bottom: 7rem;
-  background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
+  background: linear-gradient(0deg, #f05526ff 0%, #f05526ff 100%);
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
@@ -297,6 +300,8 @@ header.masthead {
 header.masthead .masthead-content {
   z-index: 1;
   position: relative;
+
+  text-shadow: 2px 2px 4px #42342aff;
 }
 
 header.masthead .masthead-content .masthead-heading {
@@ -311,7 +316,7 @@ header.masthead .bg-circle {
   z-index: 0;
   position: absolute;
   border-radius: 100%;
-  background: linear-gradient(0deg, #ee0979 0%, #ff6a00 100%);
+  background: linear-gradient(0deg, #f05526ff 0%, #fccb43ff 100%);
 }
 
 header.masthead .bg-circle-1 {
@@ -359,16 +364,15 @@ header.masthead .bg-circle-4 {
   background-color: #ee0979 !important;
 }
 .tutorial {
-  background: linear-gradient(217deg, #ff6a00 100%, #ee0979 0%),
-              linear-gradient(127deg, #ee0979 0%, #ff6a00 100%),
-              linear-gradient(336deg, #ff6a00 100%, #ee0979 0%);
+  background: linear-gradient(217deg, #f05526ff 100%, #fccb43ff 0%),
+              linear-gradient(127deg, #fccb43ff 0%, #f05526ff 100%),
+              linear-gradient(336deg, #f05526ff 100%, #fccb43ff 0%);
 
 }
-
 .bg-secondary {
-  background: linear-gradient(217deg, #ff6a00 0%, #ee0979 100%),
-              linear-gradient(127deg, #ee0979 100%, #ff6a00 0%),
-              linear-gradient(336deg, #ff6a00 0%, #ee0979 100%);
+  background: linear-gradient(217deg, #f05526ff 0%, #fccb43ff 100%),
+              linear-gradient(127deg, #fccb43ff 100%, #f05526ff 0%),
+              linear-gradient(336deg, #f05526ff 0%, #fccb43ff 100%);
 
 
 }
